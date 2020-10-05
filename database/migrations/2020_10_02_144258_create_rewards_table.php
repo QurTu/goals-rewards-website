@@ -16,7 +16,7 @@ class CreateRewardsTable extends Migration
         Schema::create('rewards', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->text('description');
+            $table->text('description');    
             $table->decimal('points' , 8 ,1)->default(0);
             $table->timestamps();
         });

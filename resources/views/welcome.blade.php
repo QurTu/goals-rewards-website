@@ -9,7 +9,8 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-  
+    
+   
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -28,8 +29,14 @@
         <div class="container">c</div>
         <div class="container">d</div>
         <div class="container">e</div>
-
-       
-        <footer></footer>  
+ <form action="{{route('koja')}}" method="post">
+     @csrf
+        <div name='koja'  id="example">kadwaawdawdawdaw</div>
+        <button type="submit"> eiskadwa</button>
+        </form>
+        <div id="picker"></div>
+        <footer>aaaaaaaaaaaa</footer>  
+        <!-- Scripts -->
+        <script src="{{asset('js/app.js')}}" ></script>
     </body>
 </html>

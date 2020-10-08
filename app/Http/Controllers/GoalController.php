@@ -41,7 +41,7 @@ class GoalController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function add(Request $request)
+    public function add(Request $request) 
     {
         $goal = new Goal();
         $goal->name = $request->name;

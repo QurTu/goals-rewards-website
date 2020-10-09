@@ -36,7 +36,7 @@ class TaskController extends Controller
     {
         $id = Auth::id();
         $goals = Goal::where('user_id', $id)->get();
-        return view('tasks.create' , compact('goals', 'goals')); 
+        return view('tasks.create' , compact('goals', $goals)); 
     }
 
     /**
@@ -47,17 +47,16 @@ class TaskController extends Controller
      */
     public function add(Request $request)
     {
+        
+        
         $task = new Task();
         $task->name = $request->name;
         $task->description = $request->description;
+        $task->points = $request->points;
         $task->type = $request->type;
         $task->user_id = Auth::id();
-        $task->points = $request->points;
         $task->goal_id = $request->goal_id;
-        if(isset( $request->due)){
-            $task->due_date = $request->due;   
-        }
-       
+        $task->weekdays = json_encode($request->weekdays);
         $task->save();
         return  redirect()->back();
     }
@@ -81,7 +80,9 @@ class TaskController extends Controller
      */
     public function edit(Task $task)
     {
-        //
+        $id = Auth::id();
+        $goals = Goal::where('user_id', $id)->get();
+        return view('tasks.edit' , \compact('task', $task ,'goals', $goals));
     }
 
     /**
@@ -93,7 +94,15 @@ class TaskController extends Controller
      */
     public function update(Request $request, Task $task)
     {
-        //
+        
+        $task->name = $request->name;
+        $task->description = $request->description;
+        $task->points = $request->points;
+        $task->type = $request->type;
+        $task->goal_id = $request->goal_id;
+        $task->weekdays = json_encode($request->weekdays);
+        $task->save();
+        return  redirect()->back();
     }
 
     /**
@@ -102,11 +111,10 @@ class TaskController extends Controller
      * @param  \App\Models\Task  $task
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Task $task)
+    public function delete(Task $task)
     {
-        //
+        $task->delete();
+        return \redirect()->back();
     }
-    public function koja(Request $request) {
-        return $request;
-    }
+   
 }

@@ -20,21 +20,23 @@
         <option value="non-periodic" > Many times (non-periodic) </option>
         </select> 
 
-        <label >  how ofent?  </label>
-        <select name="when" >
-        <option value="daily" > daily </option>
-        <option value="weekly" > weekly </option>
-        <option value="monthly" > weekly </option>
-        </select> 
-
-        <select name = 'subject[]' multiple size = 6>   
-                <option value = 'english'>ENGLISH</option> 
-                <option value = 'maths'>MATHS</option> 
-                <option value = 'computer'>COMPUTER</option> 
-                <option value = 'physics'>PHYSICS</option> 
-                <option value = 'chemistry'>CHEMISTRY</option> 
-                <option value = 'hindi'>HINDI</option> 
-            </select> 
+        
+        <br>
+        <label >  1  </label>
+ <input type="checkbox" value='1' name="weekdays[]" /> 
+ <label >  2 </label>
+ <input type="checkbox" value='2' name="weekdays[]" />
+ <label >  3 </label>
+ <input type="checkbox"value='3' name="weekdays[]" />
+ <label >4  </label>
+ <input type="checkbox" value='4' name="weekdays[]" />
+ <label >  5  </label>
+ <input type="checkbox" value='5' name="weekdays[]" />
+ <label > 6  </label>
+ <input type="checkbox" value='6' name="weekdays[]" />
+ <label >  7  </label>
+ <input type="checkbox" value='7' name="weekdays[]" />
+      
     @csrf
     <div id="example">aaaa</div>
     <button type="submit"> submmit</button>

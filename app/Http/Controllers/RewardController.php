@@ -4,9 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Reward;
 use Illuminate\Http\Request;
+use Auth;
 
 class RewardController extends Controller
 {
+    public function __construct()
+    {
+         $this->middleware('auth');
+     }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +19,9 @@ class RewardController extends Controller
      */
     public function index()
     {
-        //
+        $id = Auth::id();
+        $rewards = reward::where('user_id', $id)->get();
+        return view('rewards.rewards' , compact('rewards', 'rewards'));
     }
 
     /**
@@ -24,7 +31,8 @@ class RewardController extends Controller
      */
     public function create()
     {
-        //
+       
+        return view('rewards.create'); 
     }
 
     /**
@@ -33,9 +41,16 @@ class RewardController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function add(Request $request)
     {
-        //
+        $reward = new Reward();
+        $reward->name = $request->name;
+        $reward->description = $request->description;
+        $reward->points = $request->points;
+        $reward->user_id = Auth::id();
+        $reward->save();
+        return redirect()->back();
+
     }
 
     /**
@@ -57,7 +72,7 @@ class RewardController extends Controller
      */
     public function edit(Reward $reward)
     {
-        //
+        return view('rewards.edit', \compact('reward', $reward));
     }
 
     /**
@@ -69,7 +84,11 @@ class RewardController extends Controller
      */
     public function update(Request $request, Reward $reward)
     {
-        //
+        $reward->name = $request->name;
+        $reward->description = $request->description;
+        $reward->points = $request->points;
+        $reward->save();
+        return redirect()->back();
     }
 
     /**
@@ -78,8 +97,9 @@ class RewardController extends Controller
      * @param  \App\Models\Reward  $reward
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Reward $reward)
+    public function delete(Reward $reward)
     {
-        //
+        $reward->delete();
+        return \redirect()->back();
     }
 }

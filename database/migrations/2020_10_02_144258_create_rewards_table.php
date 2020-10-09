@@ -18,6 +18,8 @@ class CreateRewardsTable extends Migration
             $table->string('name');
             $table->text('description');    
             $table->decimal('points' , 8 ,1)->default(0);
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

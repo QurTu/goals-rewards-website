@@ -38,4 +38,10 @@ Route::post('/tasks/delete/{task}', [App\Http\Controllers\TaskController::class,
 Route::get('/tasks/edit/{task}', [App\Http\Controllers\TaskController::class, 'edit'])->name('tasks.edit');
 Route::post('/tasks/update/{task}', [App\Http\Controllers\TaskController::class, 'update'])->name('tasks.update');
 
-Route::post('/koja', [App\Http\Controllers\TaskController::class, 'koja'])->name('koja');
+//rewards
+Route::get('/rewards', [App\Http\Controllers\RewardController::class, 'index'])->name('rewards.index');
+Route::get('/rewards/create', [App\Http\Controllers\RewardController::class, 'create'])->name('rewards.create');
+Route::post('/rewards/add', [App\Http\Controllers\RewardController::class, 'add'])->name('rewards.add');
+Route::post('/rewards/delete/{reward}', [App\Http\Controllers\RewardController::class, 'delete'])->name('rewards.delete');
+Route::get('/rewards/edit/{reward}', [App\Http\Controllers\RewardController::class, 'edit'])->name('rewards.edit');
+Route::post('/rewards/update/{reward}', [App\Http\Controllers\RewardController::class, 'update'])->name('rewards.update');

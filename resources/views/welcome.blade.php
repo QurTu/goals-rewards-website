@@ -21,8 +21,8 @@
                 </h2> 
             <h3 id="sizeup2">― Jordan B. Peterson</h3>
             <div class="buttons">   
-                 <button type="button" class="sub-btn">Login</button>
-                 <button type="button" class="sub-btn">Register</button>
+            <a type="button"  href="{{ route('login') }}" class="sub-btn">Login</a>
+              <a type="button" href="{{ route('register') }}"  class="sub-btn">Register</a>
              </div>
         </div>
     </header>
@@ -38,11 +38,11 @@
                                       <!--    tipingPoint section  -->
     <div class=" why container ">
       <h1> Now is your tipping point</h1>
-      <img src=".//images/tipping.jpg" alt="">
+      <img src="{{ asset('landingpage/images/tipping.jpg')}}" alt="">
       <h2> In time, your progress will become exponential.</h2>
       <div class="buttons">   
-        <button type="button" class="sub-btn">Login</button>
-        <button type="button" class="sub-btn">Register</button>
+      <a type="button"  href="{{ route('login') }}" class="sub-btn">Login</a>
+              <a type="button" href="{{ route('register') }}"  class="sub-btn">Register</a>
     </div>
     </div>
                                        <!--    Goals section  -->
@@ -124,8 +124,8 @@
             </div> 
           </div>
             <div class="buttons">   
-              <button type="button"  href="{{ route('login') }}" class="sub-btn">Login</button>
-              <button type="button" href="{{ route('register') }}"  class="sub-btn">Register</button>
+              <a type="button"  href="{{ route('login') }}" class="sub-btn">Login</a>
+              <a type="button" href="{{ route('register') }}"  class="sub-btn">Register</a>
           
              </div>
     </div>

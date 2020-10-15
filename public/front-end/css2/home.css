@@ -1,0 +1,32 @@
+.day {
+    margin-bottom: 50px;
+
+}
+.tableflex {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 30px;
+}
+ .tableflex > button {
+     line-height: 30px;
+     font-size: 25px;
+ }
+tr > td > button {
+    padding: 50px;
+     line-height: 20px !important;
+     font-size: 20px !important;
+ }
+
+
+.mobile { 
+    display: none
+}
+
+@media (max-width: 800px) {
+.mobile { display: block }
+.desktop { display: none }
+.tableflex {
+    display: block;
+    text-align: center;
+}
+}

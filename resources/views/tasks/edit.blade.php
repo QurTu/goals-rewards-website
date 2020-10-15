@@ -1,3 +1,7 @@
+@extends('layouts.front-end')
+
+@section('content')
+
 <form action="{{route('tasks.update', [$task])}}" method="post">
     <label  for=""> name</label>
     <input name='name' value='{{$task->name}}' type="text">
@@ -42,3 +46,5 @@
     <button type="submit"> submmit</button>
     
 </form>
+
+@endsection

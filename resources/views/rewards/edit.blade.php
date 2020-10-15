@@ -1,3 +1,9 @@
+@extends('layouts.front-end')
+
+
+@section('content')
+
+
 <form action="{{route('rewards.update' , [$reward])}}" method="post">
     <label  for=""> name</label>
     <input name='name' value='{{$reward->name}}' type="text">
@@ -9,5 +15,5 @@
     <button type="submit" > submmit</button>
     
 </form>
-
+@endsection
 

@@ -24,7 +24,8 @@ class TaskController extends Controller
     {
         $id = Auth::id();
         $tasks = Task::where('user_id', $id)->get();
-        return view('tasks.tasks' , compact('tasks', 'tasks'));
+        $goals = Goal::where('user_id', $id)->get();
+        return view('tasks.tasks' , compact('tasks', 'goals'));
     }
 
     /**

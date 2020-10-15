@@ -1,3 +1,9 @@
+
+@extends('layouts.front-end')
+
+@section('content')
+
+
 <form action="{{route('goals.update' , [$goal])}}" method="post">
     <label  for=""> name</label>
     <input name='name' type="text" value= '{{$goal->name}}'>
@@ -12,3 +18,4 @@
     <button type="submit"> submmit</button>
     
 </form>
+@endsection

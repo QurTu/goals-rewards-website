@@ -14,13 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 Auth::routes();
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\GoalController::class, 'index'])->name('home.index');
 
 //goals 
 Route::get('/goals', [App\Http\Controllers\GoalController::class, 'index'])->name('goals.index');
@@ -45,3 +44,8 @@ Route::post('/rewards/add', [App\Http\Controllers\RewardController::class, 'add'
 Route::post('/rewards/delete/{reward}', [App\Http\Controllers\RewardController::class, 'delete'])->name('rewards.delete');
 Route::get('/rewards/edit/{reward}', [App\Http\Controllers\RewardController::class, 'edit'])->name('rewards.edit');
 Route::post('/rewards/update/{reward}', [App\Http\Controllers\RewardController::class, 'update'])->name('rewards.update');
+
+//home
+Route::get('/home', [App\Http\Controllers\FrontEndController::class, 'home'])->name('home.index');
+
+Route::get('/history', [App\Http\Controllers\FrontEndController::class, 'history'])->name('history.index');

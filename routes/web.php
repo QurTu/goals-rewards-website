@@ -23,7 +23,6 @@ Route::get('/home', [App\Http\Controllers\GoalController::class, 'index'])->name
 
 //goals 
 Route::get('/goals', [App\Http\Controllers\GoalController::class, 'index'])->name('goals.index');
-Route::get('/goals/create', [App\Http\Controllers\GoalController::class, 'create'])->name('goals.create');
 Route::post('/goals/add', [App\Http\Controllers\GoalController::class, 'add'])->name('goals.add');
 Route::post('/goals/delete/{goal}', [App\Http\Controllers\GoalController::class, 'delete'])->name('goals.delete');
 Route::get('/goals/edit/{goal}', [App\Http\Controllers\GoalController::class, 'edit'])->name('goals.edit');
@@ -31,7 +30,6 @@ Route::post('/goals/update/{goal}', [App\Http\Controllers\GoalController::class,
 
 //tasks 
 Route::get('/tasks', [App\Http\Controllers\TaskController::class, 'index'])->name('tasks.index');
-Route::get('/tasks/create', [App\Http\Controllers\TaskController::class, 'create'])->name('tasks.create');
 Route::post('/tasks/add', [App\Http\Controllers\TaskController::class, 'add'])->name('tasks.add');
 Route::post('/tasks/delete/{task}', [App\Http\Controllers\TaskController::class, 'delete'])->name('tasks.delete');
 Route::get('/tasks/edit/{task}', [App\Http\Controllers\TaskController::class, 'edit'])->name('tasks.edit');
@@ -39,7 +37,6 @@ Route::post('/tasks/update/{task}', [App\Http\Controllers\TaskController::class,
 
 //rewards
 Route::get('/rewards', [App\Http\Controllers\RewardController::class, 'index'])->name('rewards.index');
-Route::get('/rewards/create', [App\Http\Controllers\RewardController::class, 'create'])->name('rewards.create');
 Route::post('/rewards/add', [App\Http\Controllers\RewardController::class, 'add'])->name('rewards.add');
 Route::post('/rewards/delete/{reward}', [App\Http\Controllers\RewardController::class, 'delete'])->name('rewards.delete');
 Route::get('/rewards/edit/{reward}', [App\Http\Controllers\RewardController::class, 'edit'])->name('rewards.edit');
@@ -49,3 +46,6 @@ Route::post('/rewards/update/{reward}', [App\Http\Controllers\RewardController::
 Route::get('/home', [App\Http\Controllers\FrontEndController::class, 'home'])->name('home.index');
 
 Route::get('/history', [App\Http\Controllers\FrontEndController::class, 'history'])->name('history.index');
+
+
+Route::get('/profile', [App\Http\Controllers\FrontEndController::class, 'profile'])->name('profile.index');

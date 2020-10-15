@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Reward;
 use Illuminate\Http\Request;
 use Auth;
+use App\Models\User;
 
 class RewardController extends Controller
 {
@@ -20,8 +21,9 @@ class RewardController extends Controller
     public function index()
     {
         $id = Auth::id();
+         $user =  User::where('id' , $id)->first();
         $rewards = reward::where('user_id', $id)->get();
-        return view('rewards.rewards' , compact('rewards', 'rewards'));
+        return view('rewards.rewards' , compact('rewards', 'user'));
     }
 
     /**
@@ -29,11 +31,7 @@ class RewardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-       
-        return view('rewards.create'); 
-    }
+ 
 
     /**
      * Store a newly created resource in storage.
@@ -72,7 +70,9 @@ class RewardController extends Controller
      */
     public function edit(Reward $reward)
     {
-        return view('rewards.edit', \compact('reward', $reward));
+        $id = Auth::id();
+         $user =  User::where('id' , $id)->first();
+        return view('rewards.edit', \compact('reward', 'user'));
     }
 
     /**

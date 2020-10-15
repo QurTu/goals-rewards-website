@@ -19,7 +19,7 @@
                                <!-- NAVIGATION BAR -->
                                  <!--  Destop nav-bar -->
           <div class="desktopp"> 
-                <a class="nav-link" href="#">Home </a>
+                <a class="nav-link" href="{{route('home.index')}}">Home </a>
                 <a class="nav-link" href="{{route('tasks.index')}}">Tasks</a>
                 <a class="nav-link" href="{{route('goals.index')}}">Goals</a>
                   <a class="nav-link" href="{{route('rewards.index')}}">Rewards</a>
@@ -33,19 +33,19 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent15">
               <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                  <a class="nav-link" href="#">Home </a>
+                  <a class="nav-link" href="{{route('home.index')}}">Home </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Tasks</a>
+                  <a class="nav-link" href="{{route('tasks.index')}}">Tasks</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Goals</a>
+                  <a class="nav-link" href="{{route('goals.index')}}">Goals</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Rewards</a>
+                    <a class="nav-link" href="{{route('rewards.index')}}">Rewards</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#">History</a>
+                    <a class="nav-link" href="{{route('history.index')}}">History</a>
                   </li>
               </ul>
             </div>
@@ -56,14 +56,17 @@
         </header>
 
         <div class="accinfo">
-            <div>LVL 1</div>
-            <div> POINTS: 0</div>
+            <div>LVL: {{$user->lwl}}</div>
+            <div> POINTS: {{$user->points}}</div>
             <div class="dropdown">
-                <div >Petras</div>
+                <div >{{$user->name}}</div>
                 <div class="dropdown-content">
-                  <a href="#">Link 1</a>
+                  <a href="{{route('profile.index')}}">Profile</a>
                   <a href="#">Link 2</a>
-                  <a href="#">Link 3</a>
+                  <form id="my_form" action="{{route('logout')}}" method="post">
+                      @csrf
+                      <a href="javascript:{}" onclick="document.getElementById('my_form').submit();">Log Out</a> 
+                      </form>
                 </div>
               </div>
         </div>
@@ -127,6 +130,6 @@ $(document).ready( function () {
 } );
 
     </script>
-                
+        @yield('scripts')        
 </body>
 </html>

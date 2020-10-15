@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Goal;
 use Illuminate\Http\Request;
 use Auth;
+use App\Models\User;
 
 class GoalController extends Controller
 {
@@ -20,8 +21,9 @@ class GoalController extends Controller
     public function index()
     {   
         $id = Auth::id();
+         $user =  User::where('id' , $id)->first();
         $goals = Goal::where('user_id', $id)->get();
-        return view('goals.goals' , compact('goals', 'goals'));
+        return view('goals.goals' , compact('goals', 'user'));
        
     }
 
@@ -30,10 +32,7 @@ class GoalController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        return view('goals.create');
-    }
+    
 
     /**
      * Store a newly created resource in storage.
@@ -72,7 +71,9 @@ class GoalController extends Controller
      */
     public function edit(Goal $goal)
     {
-        return view('goals.edit' , compact('goal', $goal));
+        $id = Auth::id();
+         $user =  User::where('id' , $id)->first();
+        return view('goals.edit' , compact('goal', 'user'));
     }
 
     /**

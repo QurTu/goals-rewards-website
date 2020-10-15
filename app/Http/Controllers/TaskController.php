@@ -6,7 +6,7 @@ use App\Models\Task;
 use App\Models\Goal;
 use Illuminate\Http\Request;
 use Auth;
-
+use App\Models\User;
 class TaskController extends Controller
 {
     public function __construct()
@@ -23,9 +23,10 @@ class TaskController extends Controller
     public function index()
     {
         $id = Auth::id();
+        $user =  User::where('id' , $id)->first();
         $tasks = Task::where('user_id', $id)->get();
         $goals = Goal::where('user_id', $id)->get();
-        return view('tasks.tasks' , compact('tasks', 'goals'));
+        return view('tasks.tasks' , compact('tasks', 'goals' , 'user'));
     }
 
     /**
@@ -33,12 +34,7 @@ class TaskController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        $id = Auth::id();
-        $goals = Goal::where('user_id', $id)->get();
-        return view('tasks.create' , compact('goals', $goals)); 
-    }
+ 
 
     /**
      * Store a newly created resource in storage.
@@ -82,8 +78,9 @@ class TaskController extends Controller
     public function edit(Task $task)
     {
         $id = Auth::id();
+         $user =  User::where('id' , $id)->first();
         $goals = Goal::where('user_id', $id)->get();
-        return view('tasks.edit' , \compact('task', $task ,'goals', $goals));
+        return view('tasks.edit' , \compact('task','goals', 'user'));
     }
 
     /**

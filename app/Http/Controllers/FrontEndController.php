@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Goal;
+use App\Models\Reward;
+use App\Models\FrontEnd;
+use App\Models\Task;
 use Illuminate\Http\Request;
 use Auth;
+use Carbon\Carbon;
 use App\Models\User;
 
 
@@ -20,7 +24,11 @@ class FrontEndController extends Controller
         $id = Auth::id();
         $user =  User::where('id' , $id)->first();
          $goals = Goal::where('user_id', $id)->get();
-         return view('home.home' , compact('goals', 'user'));
+         $rewards = Reward::where('user_id', $id)->get();
+         $tasks = Task::where('user_id', $id)->get();
+         $now = Carbon::now();
+         $days = FrontEnd::sevenDaysAray();
+         return view('home.home' , compact('goals', 'user' , 'days', 'rewards', 'tasks'));
         
      }
 

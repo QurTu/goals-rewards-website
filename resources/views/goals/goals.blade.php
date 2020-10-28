@@ -59,15 +59,23 @@
 </div>
 <div class="modal-body">
 <form action="{{route('goals.add')}}" method="post">
-    <label  for=""> name</label>
-    <input name='name' type="text"> <br>
-    <label for=""> description</label>
-    <textarea name="description" id="" cols="30" rows="10"></textarea> <br>
-    
-    <label  for="">Why its important</label>
-    <textarea name="why" id="" cols="30" rows="10"></textarea> <br>
-    <label  for="">due date</label>
-    <input type="date" name="due" id=""> <br>
+<div class="form-group">
+        <label for="exampleFormControlInput1">Name:</label>
+    <input name='name' type="text" class="form-control" id="exampleFormControlInput1">
+  </div>
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">Description:</label>
+    <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3"></textarea>
+  </div>
+  <div class="form-group">
+    <label for="exampleFormControlTextarea2">Why It Is Important?</label>
+    <textarea class="form-control" name="why" id="exampleFormControlTextarea2" rows="3"></textarea>
+  </div>
+  
+  <div class="form-group">
+        <label for="exampleFormControlInput"> Due Date:</label>
+    <input type="date" name="due" class="form-control"   id="exampleFormControlInput2">
+  </div>
     @csrf
 </div>
 <div class="modal-footer">

@@ -6,16 +6,15 @@
 			<div class="wrap-login100">
                 <form action="{{route('login')}}" method="post" class="login100-form validate-form" >
 				@csrf
-					<span class="login100-form-title p-b-26">
-						Welcomeaa
-					</span>
-					<span class="login100-form-title p-b-48">
-						<i class="zmdi zmdi-font"></i>
-					</span>
+					
+						<img style="width:100%; margin-bottom:50px;" src="{{ asset('front-end/images2/goals.png')}}" alt="">
+				
+					
                     <div>Email</div>
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is: a@b.c">
 						<input class="input100" type="text" name="email">
 						<span class="focus-input100" ></span>
+					
 					</div>
                     <div>Password</div>
 					<div class="wrap-input100 validate-input" data-validate="Enter password">

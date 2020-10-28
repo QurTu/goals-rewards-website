@@ -7,12 +7,8 @@
             <form method="POST" action="{{ route('register') }}" class="login100-form validate-form">
                         @csrf
 
-					<span class="login100-form-title p-b-26">
-						Register
-					</span>
-					<span class="login100-form-title p-b-48">
-						<i class="zmdi zmdi-font"></i>
-                    </span>
+						<img style="width:100%; margin-bottom:50px;" src="{{ asset('front-end/images2/goals.png')}}" alt="">
+				
                     <div>Name</div>
                     <div class="wrap-input100 validate-input" >
 						<input class="input100" type="text" name="name" >
@@ -25,17 +21,13 @@
 					</div>
                     <div>Password</div>
 					<div class="wrap-input100 validate-input" validate="Enter password">
-						<span class="btn-show-pass">
-							<i class="zmdi zmdi-eye"></i>
-						</span>
+						
 						<input class="input100" type="password" name="password">
 						<span class="focus-input100" ></span>
                     </div>
                     <div> Repeat Password</div>
                     <div class="wrap-input100 validate-input" data-validate="Enter password">
-						<span class="btn-show-pass">
-							<i class="zmdi zmdi-eye"></i>
-						</span>
+						
 						<input class="input100" type="password" name="password_confirmation">
 						<span class="focus-input100" ></span>
 					</div>
@@ -51,11 +43,11 @@
 
 					<div class="text-center p-t-15">
 						<span class="txt1">
-							Don’t have an account?
+							Already have an account?
 						</span>
 
-						<a class="txt2" href="{{route('register')}}">
-							Sign Up
+						<a class="txt2" href="{{route('login')}}">
+							Login
 						</a>
 					</div>
 				</form>

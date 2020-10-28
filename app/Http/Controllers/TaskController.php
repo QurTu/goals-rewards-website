@@ -44,8 +44,6 @@ class TaskController extends Controller
      */
     public function add(Request $request)
     {
-        
-        
         $task = new Task();
         $task->name = $request->name;
         $task->description = $request->description;
@@ -53,7 +51,9 @@ class TaskController extends Controller
         $task->type = $request->type;
         $task->user_id = Auth::id();
         $task->goal_id = $request->goal_id;
-        $task->weekdays = json_encode($request->weekdays);
+        if(isset($request->weekdays)) {
+            $task->weekdays = json_encode($request->weekdays);
+            }
         $task->save();
         return  redirect()->back();
     }
@@ -98,9 +98,17 @@ class TaskController extends Controller
         $task->points = $request->points;
         $task->type = $request->type;
         $task->goal_id = $request->goal_id;
-        $task->weekdays = json_encode($request->weekdays);
+        if($request->type = 'periodic') {
+            if(isset($request->weekdays)) {
+                $task->weekdays = json_encode($request->weekdays);
+                }
+            else {
+                $task->weekdays = NULL;
+            }
+
+        }
         $task->save();
-        return  redirect()->back();
+        return  redirect()->route('tasks.index');
     }
 
     /**

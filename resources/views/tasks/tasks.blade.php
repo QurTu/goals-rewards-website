@@ -42,11 +42,30 @@
                           <form method="get" action="{{route('tasks.edit', [$task])}}">
                           <td class="tasktd"><button type="submit" class="btn btn-warning">Update</button></td>
                           </form>
-                          <form method="post" action="{{route('tasks.delete', [$task])}}">
-                          @csrf
-                          <td class="tasktd">  <button type="submit" class="btn btn-danger">Delete </button> </td>
-                          </form>
+                        
+                          <td class="tasktd"> <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#{{$task->name}}">
+                                     Delete
+                                       </button>  </td>
                         </tr>
+
+                          <!-- Delete Model  -->
+                          <div class="modal" id="{{$task->name}}" tabindex="-1" role="dialog">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title">Are you sure, you want to delete this task?</h5>
+                                
+                              </div>
+                              <div class="modal-footer">
+                              <form method="post" action="{{route('tasks.delete', [$task])}}">
+                          @csrf
+                           <button type="submit" class="btn btn-danger">Delete </button> 
+                          </form>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                         @endforeach
                       
                       </tbody>
@@ -72,44 +91,45 @@
         </div>
         <div class="modal-body">
         <form action="{{route('tasks.add')}}" method="post">
-    <label  for=""> name</label>
-    <input name='name' type="text"> <br>
-    <label for=""> description</label>
-    <textarea name="description" id="" cols="30" rows="10"></textarea> <br>
-    <label  for="">points for completed task</label>
-    <input type='number'step='0.1'name= 'points'  > <br>
-    
+        <div class="form-group">
+              <label for="exampleFormControlInput1">Name:</label>
+          <input name='name' type="text" class="form-control" id="exampleFormControlInput1">
+        </div>
 
-    <label >  tikslas  </label>
-        <select name="goal_id" > 
-        <option value=""   >NONE </option> 
-        @foreach ($goals as $goal)
-            <option value="{{$goal->id}}"   >{{$goal->name}} </option>
+        <div class="form-group">
+          <label for="exampleFormControlTextarea1">Description:</label>
+          <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+        <label for="exampleFormControlInput2">Points for completing task:</label>
+    <input type='number'step='0.1'name= 'points' class="form-control" min='0' id="exampleFormControlInput2">
+  </div>
+
+  <div class="form-group">
+  <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Goal:</label>
+  <select  name="goal_id" class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+    <option value=''  selected>NONE</option>
+    @foreach ($goals as $goal)
+            <option value='{{$goal->id}}'   >{{$goal->name}} </option>
         @endforeach
-        </select> <br>
-        <label >  times doing  </label>
-        <select name="type" >
-        <option value="periodic" > Periodic </option>
-        <option value="non-periodic" > Many times (non-periodic) </option>
-        </select> <br>
+  </select>
+  </div>
 
+  <div class="form-group">
+  <label class="my-1 mr-2" for="inlineForm">Type:</label>
+  <select  name="type" class="custom-select my-1 mr-sm-2" id="inlineForm">
+  <option value="non-periodic" > Many times (non-periodic) </option>
+  <option value="periodic" > Periodic </option>
+  </select>
+  </div>
+
+    
+  <div class="form-group" id ='weekdays'> 
+  
+
+</div>
         
-       
-        <label >  1  </label>
- <input type="checkbox" value='1' name="weekdays[]" /> 
- <label >  2 </label>
- <input type="checkbox" value='2' name="weekdays[]" />
- <label >  3 </label>
- <input type="checkbox"value='3' name="weekdays[]" />
- <label >4  </label>
- <input type="checkbox" value='4' name="weekdays[]" />
- <label >  5  </label>
- <input type="checkbox" value='5' name="weekdays[]" />
- <label > 6  </label>
- <input type="checkbox" value='6' name="weekdays[]" />
- <label >  7  </label>
- <input type="checkbox" value='7' name="weekdays[]" />
-      
+   
     @csrf
         </div>
         <div class="modal-footer">
@@ -126,4 +146,51 @@
 
 @endsection
 
+
+@section('scripts')
+<script type="text/javascript">  
+     $('select[name="type"]').on('change',function(){
+          let type = $(this).val();
+         if (type == 'periodic') {
+          let weekdays =  `
+          <label for=>Choose week days for this task:</label>
+  <br>
+  <div class='form-check form-check-inline'>
+  <input name='weekdays[]' class='form-check-input' type='checkbox' id='inlineCheckbox1' value='1'>
+  <label class='form-check-label' for='inlineCheckbox1'>1</label>
+</div>
+<div class='form-check form-check-inline'>
+  <input name='weekdays[]' class='form-check-input' type='checkbox' id='inlineCheckbox2' value='2'>
+  <label class='form-check-label' for='inlineCheckbox2'>2</label>
+</div>
+<div class='form-check form-check-inline'>
+  <input name='weekdays[]' class='form-check-input' type='checkbox' id='inlineCheckbox3' value='3' >
+  <label class='form-check-label' for='inlineCheckbox3'>3 </label>
+</div>
+<div class='form-check form-check-inline'>
+  <input name='weekdays[]' class='form-check-input' type='checkbox' id='inlineCheckbox4' value='4' >
+  <label class='form-check-label' for='inlineCheckbox4'>4 </label>
+</div>
+<div class='form-check form-check-inline'>
+  <input name='weekdays[]' class='form-check-input' type='checkbox' id='inlineCheckbox5' value='5' >
+  <label class='form-check-label' for='inlineCheckbox5'>5 </label>
+</div>
+<div class='form-check form-check-inline'>
+  <input name='weekdays[]' class='form-check-input' type='checkbox' id='inlineCheckbox6' value='6' >
+  <label class='form-check-label' for='inlineCheckbox6'>6 </label>
+</div>
+<div class='form-check form-check-inline'>
+  <input name='weekdays[]' class='form-check-input' type='checkbox' id='inlineCheckbox7' value='7' >
+  <label class='form-check-label' for='inlineCheckbox7'>7 </label>
+</div>
+
+</div> `;
+            $('#weekdays').append(weekdays);
+         }
+         else {
+          $('#weekdays').empty();
+         }
+            });
+ </script>
   
+@endsection

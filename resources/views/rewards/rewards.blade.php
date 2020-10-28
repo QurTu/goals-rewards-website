@@ -36,11 +36,29 @@
                           <form method="get" action="{{route('rewards.edit', [$reward])}}">
                           <td class="tasktd"><button type="submit" class="btn btn-warning">Update</button></td>
                           </form>
-                          <form method="post" action="{{route('rewards.delete', [$reward])}}">
-                          @csrf
-                          <td class="tasktd">  <button type="submit" class="btn btn-danger">Delete </button> </td>
-                          </form>
+                          <td class="tasktd"> <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#{{$reward->name}}">
+                                     Delete
+                                       </button>  </td>
+                         
                         </tr>
+                                      <!-- Delete Model  -->
+                                                <div class="modal" id="{{$reward->name}}" tabindex="-1" role="dialog">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title">Are you sure, you want to delete this reward?</h5>
+                                
+                              </div>
+                              <div class="modal-footer">
+                              <form method="post" action="{{route('rewards.delete', [$reward])}}">
+                          @csrf
+                           <button type="submit" class="btn btn-danger">Delete </button> 
+                          </form>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                         @endforeach
                       </tbody>
                     </table>
@@ -65,18 +83,19 @@
         </div>
         <div class="modal-body">
         <form action="{{route('rewards.add')}}" method="post">
-    <label  for=""> name</label>
-    <input name='name' type="text">
-    <label for=""> description</label>
-    <textarea name="description" id="" cols="30" rows="10"></textarea>
-    <label  for="">reward cost points</label>
-    <input type='number'step='0.1'name= 'points'  >
-   
+        <div class="form-group">
+        <label for="exampleFormControlInput1">Name:</label>
+    <input name='name' type="text" class="form-control" id="exampleFormControlInput1">
+  </div>
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">Description:</label>
+    <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3"></textarea>
+  </div>
+  <div class="form-group">
+        <label for="exampleFormControlInput2">Point Cost For Taking Reward:</label>
+    <input type='number'step='0.1'name= 'points' class="form-control" min='0' id="exampleFormControlInput2">
+  </div>
     @csrf
-    
-    
-
-        </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           <button type="submit" class="btn btn-success">Create New REWARD</button>

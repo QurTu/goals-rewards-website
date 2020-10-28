@@ -88,7 +88,7 @@ class RewardController extends Controller
         $reward->description = $request->description;
         $reward->points = $request->points;
         $reward->save();
-        return redirect()->back();
+        return \redirect()->route('rewards.index');
     }
 
     /**

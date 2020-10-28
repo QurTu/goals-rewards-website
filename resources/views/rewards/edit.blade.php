@@ -3,17 +3,29 @@
 
 @section('content')
 
-
+<div  style="background-color: white;" class="container collar"> 
 <form action="{{route('rewards.update' , [$reward])}}" method="post">
-    <label  for=""> name</label>
-    <input name='name' value='{{$reward->name}}' type="text">
-    <label for=""> description</label>
-    <textarea name="description"   id="" cols="30" rows="10"> {{$reward->description}}</textarea>
-    <label  for="">reward cost points</label>
-    <input type='number'step='0.1'name= 'points' value='{{$reward->points}}' >
+<div class="form-group">
+        <label for="exampleFormControlInput1">Name:</label>
+    <input name='name' value='{{$reward->name}}' type="text" class="form-control" id="exampleFormControlInput1">
+  </div>
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">Description:</label>
+    <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3"> {{$reward->description}}</textarea>
+  </div>
+  <div class="form-group">
+        <label for="exampleFormControlInput2">Point Cost For Taking Reward:</label>
+    <input  value='{{$reward->points}}' type='number'step='0.1'name= 'points' class="form-control" min='0' id="exampleFormControlInput2">
+  </div>
+  
     @csrf
-    <button type="submit" > submmit</button>
-    
-</form>
+    <div class="modal-footer">
+    <a href="{{route('rewards.index')}}">   
+          <button type="button" class="btn btn-secondary" >   Cancel</button>   </a>
+          <button type="submit" class="btn btn-success">Update REWARD</button>
+          </form>
+        </div>
+  
+</div>
 @endsection
 

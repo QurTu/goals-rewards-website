@@ -73,15 +73,8 @@ class TaskController extends Controller
                     $addTask->due_date = $day['date'];
                     $addTask->save();
                 }
-                
-                
                 }
         }
-       
-
-
-
-
         return  redirect()->back();
     }
 

@@ -1,0 +1,91 @@
+.profile {
+    padding: 50px 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr ;
+    grid-template-rows: auto;
+    margin-bottom: 30px;
+    text-align: center;
+}
+    .profile > div {
+        padding-top: 30px;
+    }
+.profile-info {
+    width: 100%;
+}
+        .profile-info > ul {
+            margin-top: 30px;
+            text-align: start;
+            padding-left: 20%;
+        }
+        .profile-info > ul >li {
+            line-height: 30px;
+            font-size: 20px;
+        }
+        .profile-info > a {
+            display: inline-block;
+            line-height: 25px;
+            font-size: 20px;
+            width: 100%;
+        }
+.profile-info >img {
+    width: 60%;
+    
+}
+
+
+.progres-bar > p {
+    text-align: start;
+}
+
+.scenario {
+    display: grid;
+    grid-template-columns: 1fr 1fr ;
+    grid-template-rows: auto;
+    margin-bottom: 30px;
+}
+    .vision {
+        text-align: center;
+        margin-top: 30px;
+    }
+    .vision >p {
+        width: 80%;
+        margin-left: 10%;
+    }
+
+
+@media (max-width: 1000px) {
+    .scenario {
+        grid-template-columns: 1fr  ;
+     }
+    .profile {
+        grid-template-columns: 1fr  ;
+    }
+    }
+
+
+
+    #imageUpload
+{
+    display: none;
+}
+
+#profileImage
+{
+    cursor: pointer;
+}
+
+#profile-container {
+    
+    width: 250px;
+    height: 250px;
+    overflow: hidden;
+    border: 1px black solid;
+     
+    
+}
+
+#profile-container img {
+    width: 60%;
+    height: 250px;
+     
+}

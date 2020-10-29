@@ -24,12 +24,78 @@
                         </tr>
                       </thead>
                       <tbody>
+                      @foreach ($day['tasks'] as $task)
+                    
                         <tr>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td><button type="button" class="btn btn-warning">Not Complieted</button></td>
-                          <td>  <button type="button" class="btn btn-danger">Remove Task</button> </td>
+                          <td>{{$task->name}}</td>
+                          <td>{{$task->description}}</td>
+                          @if ($task->status == 0)
+                          
+                          <td class="tasktd"> <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#b{{$task->uuid}}">
+                          Not Complieted
+                                       </button>  </td>
+                         @else
+                          <td><button type="button" class="btn btn-success"> Complieted</button></td>
+                         @endif
+
+                        
+
+                        
+                        <td class="tasktd"> <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#a{{$task->uuid}}">
+                        Remove Task
+                                       </button>  </td>
                         </tr>
+
+                          <!-- To Completed Model  -->
+                          <div class="modal" id="b{{$task->uuid}}" tabindex="-1" role="dialog">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                             
+                                <h5 class="modal-title">Marks Task As completed?</h5>
+                                 <form method="post" action="{{route('TaskAdd.delete' , [$task])}}">
+                                @if(isset($task->goal_id))
+                                </div>
+                                <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="exampleFormControlInput3">how many percent moved towards goal achievement by completing this task? :</label>
+                                <input type='number'step='0.1'name= 'closer' class="form-control" placeholder='%' min='0' id="exampleFormControlInput3">
+                                  </div>
+                                  @endif
+                              </div>
+                              <div class="modal-footer">
+                          @csrf
+                           <button type="submit" class="btn btn-success">Completed </button> 
+                          </form>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+
+
+                          <!-- Delete Model  -->
+                          <div class="modal" id="a{{$task->uuid}}" tabindex="-1" role="dialog">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title">Are you sure, you want to remove this task?</h5>
+                              </div>
+                              <div class="modal-footer">
+                              <form method="post" action="{{route('TaskAdd.delete' , [$task])}}">
+                          @csrf
+                           <button type="submit" class="btn btn-danger">Remove </button> 
+                          </form>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+
+
+                        @endforeach
                         <tr>
                           <td>  </td>
                           <td> <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#a{{$day['date']}}">
@@ -42,13 +108,13 @@
                     </table>
                     <!-- MOBILE TASKS TABLE-->
                     <div class="services-content"> 
-  
+                    @foreach ($day['tasks'] as $task)
                       <div class='serviss'>
                            <div class="line">
                            <div class="top"></div>
                            </div>
-                            <div class='head'> Driving forces </div>
-                            <div class='text'> Two things drive human actions: necessities — food, sleep, avoidance of pain; and rewards. Any object, event, or activity can be a reward if it motivates us, causes us to learn, or elicits pleasurable feelings.</div>
+                            <div class='head'> {{$task->name}} </div>
+                            <div class='text'> {{$task->description}}</div>
                             <table   class="table ">
                               <thead>
                                 <tr>
@@ -58,13 +124,71 @@
                               </thead>
                               <tbody>
                                 <tr>
-                                  <td><button type="button" class="btn btn-warning">Not Complieted</button></td>
-                                  <td>  <button type="button" class="btn btn-danger">Remove Task</button> </td>
+                                          @if ($task->status == 0)
+                                          <td class="tasktd"> <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#b{{$task->uuid}}">
+                          Not Complieted
+                                       </button>  </td>
+                                  @else
+                                    <td><button type="button" class="btn btn-success"> Complieted</button></td>
+                                  @endif
+                                  <td class="tasktd"> <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#a{{$task->uuid}}">
+                        Remove Task
+                                       </button>  </td>
+                        </tr>
+
+
+
+                                   <!-- To Completed Model  -->
+                <div class="modal" id="b{{$task->uuid}}" tabindex="-1" role="dialog">
+                                          <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                              <div class="modal-header">
+                                            
+                                                <h5 class="modal-title">Marks Task As completed?</h5>
+                                                <form method="post" action="{{route('TaskAdd.delete' , [$task])}}">
+                                                @if(isset($task->goal_id))
+                                                </div>
+                                                <div class="modal-body">
+                                                <div class="form-group">
+                                                    <label for="exampleFormControlInput3">how many percent moved towards goal achievement by completing this task? :</label>
+                                                <input type='number'step='0.1'name= 'closer' class="form-control" placeholder='%' min='0' id="exampleFormControlInput3">
+                                                  </div>
+                                                  @endif
+                                              </div>
+                                              <div class="modal-footer">
+                                          @csrf
+                                          <button type="submit" class="btn btn-success">Completed </button> 
+                                          </form>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                          <!-- Delete Model  -->
+                          <div class="modal" id="a{{$task->uuid}}" tabindex="-1" role="dialog">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title">Are you sure, you want to remove this task?</h5>
+                              </div>
+                              <div class="modal-footer">
+                              <form method="post" action="{{route('TaskAdd.delete' , [$task])}}">
+                          @csrf
+                           <button type="submit" class="btn btn-danger">Remove </button> 
+                          </form>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                                 </tr>
                               </tbody>
                             </table>
                            </div> 
-  
+
+
+
+                        @endforeach
                         
                            
                
@@ -82,12 +206,13 @@
               <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                    
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
                   <div class="modal-body">
+                  <form action="{{route('tasks.addFromList')}}" method="post">
                             <div class="form-group">
                     <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Choose task from the list:</label>
                     <select  name="reward" class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
@@ -96,25 +221,43 @@
                           @endforeach
                     </select>
                           </div>
+                          <input type="hidden" name="due_date" value="{{$day['date']}}">
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Add From The List</button>
+                  <a href="{{route('tasks.index')}}">  <button type="button" class="btn btn-success">Create New Task For The List</button>  </a>
+                    <button type="submit" class="btn btn-primary">Add From The List</button>
+                    @csrf
+                   </form>
+                  </div>
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Create new task for this day:</h5>
                   </div>
                   <div class="modal-body">
-                    ...
+                  <form action="{{route('tasksAdd.add')}}" method="post">
+                  <div class="form-group">
+        <label for="exampleFormControlInput1">Name:</label>
+    <input name='name' type="text" class="form-control" id="exampleFormControlInput1">
+  </div>
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">Description:</label>
+    <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3"></textarea>
+  </div>
+  <div class="form-group">
+        <label for="exampleFormControlInput2">Points for completing task:</label>
+    <input type='number'step='0.1'name= 'points' class="form-control" min='0' id="exampleFormControlInput2">
+  </div>
+  <input type="hidden" name="due_date" value="{{$day['date']}}">
+    @csrf    
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="submit" class="btn btn-success">Create New Task</button>
                   </div>
                 </div>
               </div>
             </div>
-  
-              @endforeach
-              
-         
-         
+       </form>
+              @endforeach  
           </div>
           
           

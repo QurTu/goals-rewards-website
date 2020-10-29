@@ -23,7 +23,7 @@ class CreateHistoriesTable extends Migration
             $table->unsignedBigInteger('goal_id')->nullable();
             $table->foreign('goal_id')->references('id')->on('goals');
             $table->string('done')->default(0);
-            $table->decimal('points' , 8 ,1)->default(0);
+            $table->decimal('points' , 8 ,1);
             $table->decimal('balance' , 8 ,1);
             $table->timestamps();
         });

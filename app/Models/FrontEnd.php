@@ -6,6 +6,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use App\Models\TaskAdd;
+use Illuminate\Support\Str;
 
 class FrontEnd extends Model
 {
@@ -13,6 +15,7 @@ class FrontEnd extends Model
 
    public static function sevenDaysAray() {
     $sevendays = array();
+    $savendaysWithTasks = array();
     for($x = 0; $x <= 6; $x++)  {
         $now = Carbon::now();
         $dayArray = $now->addDays($x)->toArray();
@@ -30,7 +33,16 @@ class FrontEnd extends Model
         $day['date'] = $dayArray['year'] . "-" . $dayArray['month'] . '-' . $dayArray['day'] ;
         array_push(  $sevendays, $day );
     }
-    return $sevendays;
+    foreach($sevendays as $day) {
+        $day['tasks'] = TaskAdd::where('due_date', $day['date'])->get();
+        foreach($day['tasks'] as $task) {
+            $task['uuid']  = (string) Str::uuid();
+        }
+        array_push(   $savendaysWithTasks, $day );
+    }
+
+
+    return  $savendaysWithTasks;
   }
  
 }

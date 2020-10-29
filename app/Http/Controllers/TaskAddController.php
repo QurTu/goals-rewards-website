@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\TaskAdd;
 use Illuminate\Http\Request;
-
+use Auth;
 class TaskAddController extends Controller
 {
     /**
@@ -12,11 +12,34 @@ class TaskAddController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function addFromList(Request $request)
     {
-        //
+        $task = new TaskAdd();
+        $request->reward = json_decode($request->reward);
+        $task->name = $request->reward->name;
+        $task->description = $request->reward->description;
+        $task->goal_id = $request->reward->goal_id;
+        $task->user_id = Auth::id();
+        $task->points = $request->reward->points;
+        $task->done = 0;
+        $task->due_date = $request->due_date;
+        $task->save();
+        return \redirect()->back();
     }
 
+    public function add(Request $request)
+    {
+        $task = new TaskAdd();
+        $task->name = $request->name;
+        $task->description = $request->description;
+        $task->goal_id = null;
+        $task->user_id = Auth::id();
+        $task->points = $request->points;
+        $task->done = 0;
+        $task->due_date = $request->due_date;
+        $task->save();
+        return \redirect()->back();
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -78,8 +101,9 @@ class TaskAddController extends Controller
      * @param  \App\Models\TaskAdd  $taskAdd
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TaskAdd $taskAdd)
+    public function delete(TaskAdd $taskAdd)
     {
-        //
+        $taskAdd->delete();
+        return \redirect()->back();
     }
 }

@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\history;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use Auth;
 
 class HistoryController extends Controller
 {
@@ -12,9 +15,25 @@ class HistoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function TakeRewardNew(Request $request)
     {
-        //
+        $history = new History();
+    
+        $history->name = $request->name;
+        $history->type= "reward";
+        $history->due_date = Carbon::now()->toDateTimeString();
+        $history->user_id = Auth::id();
+       
+         $history->done = 2;
+         $history->points = $request->points;
+          // give user points
+          $id = Auth::id();
+          $user =  User::where('id' , $id)->first();
+          $user->points -= $request->points;
+          $user->save();
+         $history->balance = $user->points;
+         $history->save();
+         return \redirect()->back();
     }
 
     /**
@@ -22,9 +41,26 @@ class HistoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function TakeRewardList(Request $request)
     {
-        //
+        
+       
+        $history = new History();
+        $request->reward = \json_decode($request->reward );
+        $history->name = $request->reward->name;
+        $history->type= "reward";
+        $history->due_date = Carbon::now()->toDateTimeString();
+        $history->user_id = Auth::id();
+         $history->done = 2;
+         $history->points = $request->reward->points;
+          // give user points
+          $id = Auth::id();
+          $user =  User::where('id' , $id)->first();
+          $user->points -= $request->reward->points;
+          $user->save();
+         $history->balance = $user->points;
+         $history->save();
+         return \redirect()->back();
     }
 
     /**

@@ -1,17 +1,13 @@
 @extends('layouts.front-end')
-
-
 @section('content')
 
                                      <!--    content  SECTION -->
                                      <div style="background-color: white;" class="container collar"> 
                                      <button  type="button" class="btn btn-success float-right"  data-toggle="modal" data-target="#rewardmodal">Take Reward</button>
             @foreach ($days as $day)
-            <div class="day">
-        
+            <div class="day">       
                 <div class="tableflex">
-                  <h2>{{$day['date']}}</h2> 
-                  
+                  <h2>{{$day['date']}}</h2>                   
                 </div> 
                         <!--  DESTOP TASKS TABLE-->
                   <table   class="table desktop ">
@@ -24,28 +20,22 @@
                         </tr>
                       </thead>
                       <tbody>
-                      @foreach ($day['tasks'] as $task)
-                    
+                      @foreach ($day['tasks'] as $task)                   
                         <tr>
                           <td>{{$task->name}}</td>
                           <td>{{$task->description}}</td>
-                          @if ($task->status == 0)
-                          
+                          @if ($task->done == 0)                          
                           <td class="tasktd"> <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#b{{$task->uuid}}">
                           Not Complieted
                                        </button>  </td>
-                         @else
+                                       @endif 
+                                       @if ($task->done == 1)
                           <td><button type="button" class="btn btn-success"> Complieted</button></td>
                          @endif
-
-                        
-
-                        
                         <td class="tasktd"> <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#a{{$task->uuid}}">
                         Remove Task
                                        </button>  </td>
                         </tr>
-
                           <!-- To Completed Model  -->
                           <div class="modal" id="b{{$task->uuid}}" tabindex="-1" role="dialog">
                           <div class="modal-dialog" role="document">
@@ -53,7 +43,7 @@
                               <div class="modal-header">
                              
                                 <h5 class="modal-title">Marks Task As completed?</h5>
-                                 <form method="post" action="{{route('TaskAdd.delete' , [$task])}}">
+                                 <form method="post" action="{{route('TaskAdd.done' , [$task])}}">
                                 @if(isset($task->goal_id))
                                 </div>
                                 <div class="modal-body">
@@ -73,8 +63,6 @@
                           </div>
                         </div>
 
-
-
                           <!-- Delete Model  -->
                           <div class="modal" id="a{{$task->uuid}}" tabindex="-1" role="dialog">
                           <div class="modal-dialog" role="document">
@@ -92,9 +80,6 @@
                             </div>
                           </div>
                         </div>
-
-
-
                         @endforeach
                         <tr>
                           <td>  </td>
@@ -124,7 +109,7 @@
                               </thead>
                               <tbody>
                                 <tr>
-                                          @if ($task->status == 0)
+                                @if ($task->done == 0)
                                           <td class="tasktd"> <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#b{{$task->uuid}}">
                           Not Complieted
                                        </button>  </td>
@@ -136,8 +121,6 @@
                                        </button>  </td>
                         </tr>
 
-
-
                                    <!-- To Completed Model  -->
                 <div class="modal" id="b{{$task->uuid}}" tabindex="-1" role="dialog">
                                           <div class="modal-dialog" role="document">
@@ -145,7 +128,7 @@
                                               <div class="modal-header">
                                             
                                                 <h5 class="modal-title">Marks Task As completed?</h5>
-                                                <form method="post" action="{{route('TaskAdd.delete' , [$task])}}">
+                                                <form method="post" action="{{route('TaskAdd.done' , [$task])}}">
                                                 @if(isset($task->goal_id))
                                                 </div>
                                                 <div class="modal-body">
@@ -185,28 +168,17 @@
                               </tbody>
                             </table>
                            </div> 
-
-
-
-                        @endforeach
-                        
-                           
-               
+                        @endforeach                                          
                            <td> <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#a{{$day['date']}}">
                             +Add Task
-                          </button></td>
-               
-                       </div>
-                     
-                
-              </div>
-  
+                          </button></td>               
+                       </div>                                   
+              </div> 
                         <!-- ADD TASK MODEL-->
                           <div class="modal fade" id="a{{$day['date']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
-                  <div class="modal-header">
-                    
+                  <div class="modal-header">                   
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
@@ -224,8 +196,8 @@
                           <input type="hidden" name="due_date" value="{{$day['date']}}">
                   </div>
                   <div class="modal-footer">
-                  <a href="{{route('tasks.index')}}">  <button type="button" class="btn btn-success">Create New Task For The List</button>  </a>
-                    <button type="submit" class="btn btn-primary">Add From The List</button>
+                  <a href="{{route('tasks.index')}}">  <button type="button" class="btn btn-primary">Create New Task For The List</button>  </a>
+                    <button type="submit" class="btn btn-success">Add From The List</button>
                     @csrf
                    </form>
                   </div>
@@ -235,19 +207,19 @@
                   <div class="modal-body">
                   <form action="{{route('tasksAdd.add')}}" method="post">
                   <div class="form-group">
-        <label for="exampleFormControlInput1">Name:</label>
-    <input name='name' type="text" class="form-control" id="exampleFormControlInput1">
-  </div>
-  <div class="form-group">
-    <label for="exampleFormControlTextarea1">Description:</label>
-    <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3"></textarea>
-  </div>
-  <div class="form-group">
-        <label for="exampleFormControlInput2">Points for completing task:</label>
-    <input type='number'step='0.1'name= 'points' class="form-control" min='0' id="exampleFormControlInput2">
-  </div>
-  <input type="hidden" name="due_date" value="{{$day['date']}}">
-    @csrf    
+                    <label for="exampleFormControlInput1">Name:</label>
+                <input name='name' type="text" class="form-control" id="exampleFormControlInput1">
+              </div>
+              <div class="form-group">
+                <label for="exampleFormControlTextarea1">Description:</label>
+                <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3"></textarea>
+              </div>
+              <div class="form-group">
+                    <label for="exampleFormControlInput2">Points for completing task:</label>
+                <input type='number'step='0.1'name= 'points' class="form-control" min='0' id="exampleFormControlInput2">
+              </div>
+              <input type="hidden" name="due_date" value="{{$day['date']}}">
+                @csrf    
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -272,7 +244,8 @@
           </button>
         </div>
         <div class="modal-body">
-
+        <form action="{{route('takeReward.list')}}" method="post">  
+        @csrf
                 <div class="form-group">
           <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Choose reward from the list:</label>
           <select  name="reward" class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
@@ -283,11 +256,30 @@
   </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <a href="{{route('rewards.index')}}">   <button type="button" class="btn btn-success">Create New Reward</button>    </a>
-          
-          <button type="button" class="btn btn-primary">Take Reward</button>
+          <a href="{{route('rewards.index')}}">   <button type="button" class="btn btn-primary">Create New Reward to The List</button>    </a>
+          <button type="submit" class="btn btn-success">Take Reward From the List</button>
+            </form>
         </div>
+        <div class=" modal-header  ">
+          <h5 class=" text-center" id="exampleModalLongTitle">Create new reward for now:</h5>
+        </div>
+        <div class="modal-body">
+        <form action="{{route('takeReward.new')}}" method="post">    
+        <div class="form-group">
+        <label for="exampleFormControlInput1">Name:</label>
+    <input name='name' type="text" class="form-control" id="exampleFormControlInput1">
+  </div>
+  <div class="form-group">
+        <label for="exampleFormControlInput2">Point Cost For Taking Reward:</label>
+    <input type='number'step='0.1'name= 'points' class="form-control" min='0' id="exampleFormControlInput2">
+  </div>
+    @csrf
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-success">Take Reward</button>
+          </form>
+        </div>
+
       </div>
     </div>
   </div>

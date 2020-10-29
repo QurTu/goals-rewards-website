@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use App\Models\User;
 
 
+
 class FrontEndController extends Controller
 {
     public function __construct()

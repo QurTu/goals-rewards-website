@@ -7,6 +7,8 @@ use App\Models\Goal;
 use Illuminate\Http\Request;
 use Auth;
 use App\Models\User;
+use App\Models\TaskAdd;
+use App\Models\FrontEnd;
 class TaskController extends Controller
 {
     public function __construct()
@@ -55,6 +57,31 @@ class TaskController extends Controller
             $task->weekdays = json_encode($request->weekdays);
             }
         $task->save();
+        // add task for next 7 days
+        if(isset($request->weekdays)) {
+        $days = FrontEnd::sevenDaysAray();
+        foreach($days as $day) {
+                $task->weekdays = json_encode($request->weekdays);
+                if(strpos($task->weekdays, '' . $day['weekday']) !== FALSE) {
+                    $addTask= new TaskAdd();
+                    $addTask->name = $request->name;
+                    $addTask->description = $request->description;
+                    $addTask->goal_id = $request->goal_id;
+                    $addTask->user_id = Auth::id();
+                    $addTask->points = $request->points;
+                    $addTask->done = 0;
+                    $addTask->due_date = $day['date'];
+                    $addTask->save();
+                }
+                
+                
+                }
+        }
+       
+
+
+
+
         return  redirect()->back();
     }
 

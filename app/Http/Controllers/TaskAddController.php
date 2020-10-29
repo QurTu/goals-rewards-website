@@ -1,10 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Goal;
+use App\Models\User;
 use App\Models\TaskAdd;
+use App\Models\History;
 use Illuminate\Http\Request;
 use Auth;
+use Carbon\Carbon;
 class TaskAddController extends Controller
 {
     /**
@@ -45,9 +48,37 @@ class TaskAddController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function done(Request $request , TaskAdd $taskAdd)
     {
-        //
+        //mark as complieted
+        $taskAdd->done = 1 ;
+        $taskAdd->save();
+        // give user points
+        $id = Auth::id();
+        $user =  User::where('id' , $id)->first();
+        $user->points += $taskAdd->points;
+        $user->save();
+        // goal progress
+        if(isset($request->closer)) {
+         $goal = Goal::where('id', $taskAdd->goal_id)->first();
+        $goal->progress += $request->closer;
+        $goal->save();
+        }
+        // save in history
+         $history = new History();
+         $history->name = $taskAdd->name;
+         $history->type = "task";
+         $history->due_date = Carbon::now()->toDateTimeString();
+         $history->user_id = Auth::id();
+         if(isset($request->closer)) {
+            $history->goal_id = $goal->id;
+          }
+          $history->done = 1;
+          $history->points = $taskAdd->points;
+          $history->balance = $user->points;
+          $history->save();
+        return \redirect()->back();
+
     }
 
     /**

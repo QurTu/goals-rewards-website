@@ -54,4 +54,6 @@ Route::post('/tasksAdd/add', [App\Http\Controllers\TaskAddController::class, 'ad
 Route::post('/tasksAdd/delete/{taskAdd}', [App\Http\Controllers\TaskAddController::class, 'delete'])->name('TaskAdd.delete');
 Route::post('/tasksAdd/done/{taskAdd}', [App\Http\Controllers\TaskAddController::class, 'done'])->name('TaskAdd.done');
 
-
+// taking rewards - a.k.a adding to history
+Route::post('/takeReward/new', [App\Http\Controllers\HistoryController::class, 'TakeRewardNew'])->name('takeReward.new');
+Route::post('/takeReward/list', [App\Http\Controllers\HistoryController::class, 'TakeRewardList'])->name('takeReward.list');

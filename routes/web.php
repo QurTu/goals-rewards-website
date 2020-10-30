@@ -17,10 +17,10 @@ use Illuminate\Support\Facades\Route;
 
 
 Auth::routes();
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 
 Route::get('/home', [App\Http\Controllers\GoalController::class, 'index'])->name('home.index');
-
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 //goals 
 Route::get('/goals', [App\Http\Controllers\GoalController::class, 'index'])->name('goals.index');
 Route::post('/goals/add', [App\Http\Controllers\GoalController::class, 'add'])->name('goals.add');

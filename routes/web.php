@@ -44,7 +44,7 @@ Route::post('/rewards/update/{reward}', [App\Http\Controllers\RewardController::
 
 //home
 Route::get('/home', [App\Http\Controllers\FrontEndController::class, 'home'])->name('home.index');
-Route::get('/history', [App\Http\Controllers\FrontEndController::class, 'history'])->name('history.index');
+
 Route::get('/profile', [App\Http\Controllers\FrontEndController::class, 'profile'])->name('profile.index');
 
 //Tasks added to To Do
@@ -57,6 +57,7 @@ Route::post('/tasksAdd/done/{taskAdd}', [App\Http\Controllers\TaskAddController:
 // taking rewards - a.k.a adding to history
 Route::post('/takeReward/new', [App\Http\Controllers\HistoryController::class, 'TakeRewardNew'])->name('takeReward.new');
 Route::post('/takeReward/list', [App\Http\Controllers\HistoryController::class, 'TakeRewardList'])->name('takeReward.list');
-
+Route::get('/history', [App\Http\Controllers\FrontEndController::class, 'history'])->name('history.index');
+Route::get('/histroy/dates', [App\Http\Controllers\HistoryController::class, 'history'])->name('history.list');
 
 Route::get('/show', [App\Http\Controllers\TaskAddController::class, 'show'])->name('whow');

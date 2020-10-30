@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Auth;
+use App\Models\TaskAdd;
 
 class HistoryController extends Controller
 {
@@ -69,9 +70,17 @@ class HistoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function history(Request $request)
+    {   
+        $id = Auth::id();
+        $user =  User::where('id' , $id)->first();
+        $start = $request->start;
+        $end = $request->end;
+       $history = History::whereBetween('due_date', [$start, $end]);
+       $history =  $history->where('user_id' , $id)->get();
+       
+
+       return view('history.histroyList', \compact('history', 'user'));
     }
 
     /**

@@ -90,35 +90,10 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <script src="http:////cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
  
+    @yield('scripts')  
     
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-    <script type="text/javascript">
-        $(function() {
-        
-            var start = moment().subtract(29, 'days');
-            var end = moment();
-        
-            function cb(start, end) {
-                $('#reportrange span').html(start.format('D MMMM , YYYY') + ' - ' + end.format('D MMMM , YYYY'));
-            }
-        
-            $('#reportrange').daterangepicker({
-                startDate: start,
-                endDate: end,
-                ranges: {
-                   'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                   'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-                   'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                   'This Month': [moment().startOf('month'), moment().endOf('month')],
-                   'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-                }
-            }, cb);
-        
-            cb(start, end);
-        
-        });
-        </script>
         <script type="text/javascript">
             $(document).ready( function () {
                 $('#dtBasicExample').DataTable();
@@ -130,6 +105,6 @@ $(document).ready( function () {
 } );
 
     </script>
-        @yield('scripts')        
+             
 </body>
 </html>

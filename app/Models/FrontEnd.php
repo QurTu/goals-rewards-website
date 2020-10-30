@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use App\Models\TaskAdd;
 use Illuminate\Support\Str;
+use Auth;
 
 class FrontEnd extends Model
 {
@@ -34,7 +35,8 @@ class FrontEnd extends Model
         array_push(  $sevendays, $day );
     }
     foreach($sevendays as $day) {
-        $day['tasks'] = TaskAdd::where('due_date', $day['date'])->get();
+       
+        $day['tasks'] = TaskAdd::where('user_id' , Auth::id())->where('due_date', $day['date'])->get();
         foreach($day['tasks'] as $task) {
             $task['uuid']  = (string) Str::uuid();
         }

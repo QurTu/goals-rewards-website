@@ -40,6 +40,7 @@ class addtasks extends Command
      */
     public function handle()
     {
+        //add tasks daily
         $tasks = Task::where('type' , 'periodic')->get();
         $day =  FrontEnd::daySeven();
     foreach($tasks as $task){
@@ -58,5 +59,28 @@ class addtasks extends Command
                     } 
             }
     } 
+        // daily not complieted tasks to history
+        $tasks = TaskAdd::where('due_date' , Carbon::yesterday() )->get();
+        foreach($tasks as $task) {
+            // save in history
+            $history = new History();
+            $history->name = $task->name; 
+            $history->type = "task"; 
+            $history->due_date = $task->due_date;
+            $history->user_id = $task->user_id; 
+            $history->goal_id = $task->goal_id; 
+            $history->done = $task->done; 
+            $history->points = $task->points; 
+            $id = Auth::id();
+            $user =  User::where('id' , $id)->first();
+            $history->balance = $user->points;
+            $history->save();
+            // delete from Taskadd
+            $fromTasks = TaskAdd::where('id', $task->id)->first();
+            $fromTasks->delete();
+        }
+        
+
+
     }
 }

@@ -47,7 +47,13 @@ class RewardController extends Controller
         $reward->points = $request->points;
         $reward->user_id = Auth::id();
         $reward->save();
-        return redirect()->back();
+
+        $notification=array(
+            'messege'=>'New Reward Created!',
+            'alert-type'=>'success'
+             );
+           return Redirect()->back()->with($notification);
+        
 
     }
 
@@ -88,7 +94,14 @@ class RewardController extends Controller
         $reward->description = $request->description;
         $reward->points = $request->points;
         $reward->save();
-        return \redirect()->route('rewards.index');
+
+        $notification=array(
+            'messege'=>' Reward Successfully Edited!',
+            'alert-type'=>'success'
+             );
+           return Redirect()->route('rewards.index')->with($notification);
+        
+       
     }
 
     /**
@@ -100,6 +113,12 @@ class RewardController extends Controller
     public function delete(Reward $reward)
     {
         $reward->delete();
-        return \redirect()->back();
+        $notification=array(
+            'messege'=>'Reward Was Deleted!',
+            'alert-type'=>'error'
+             );
+           return Redirect()->back()->with($notification);
+        
+        
     }
 }

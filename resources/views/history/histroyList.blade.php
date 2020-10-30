@@ -6,21 +6,25 @@
 @section('content')
 
                                  <!--    content  SECTION -->
-                                 <div  style="background-color: white;" class="container collar"> 
+                                 
             
+                                 <div  style="background-color: white;" class="container collar"> 
             <div class="day">
-                <form action=""   method="get">
+                <form action="{{route('history.list')}}"   method="get">
                 <div class="historypicker" >
                   <h2>HISTORY</h2> 
                 <div class="historypickercommet">Choose range you want to search:</div>
-                  
   <div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+ 
       <i class="fa fa-calendar"></i>&nbsp;
-      <span></span> <i class="fa fa-caret-down"></i>
+      <span name='dates'></span> <i class="fa fa-caret-down"></i>
+      <input type="hidden" name="start">
+      <input type="hidden" name="end">
   </div>
               <button type="submit" class="btn btn-success">Get History</button>
                  </form>
                 </div> 
+              </div>
                 
 
 
@@ -43,7 +47,7 @@
                       <tbody>
                       @foreach($history as $day)
                         <tr >
-                          <td class="histroytd">{{$day->created_at}}</td>
+                          <td class="histroytd">{{$day->due_date}}</td>
                           <td class="histroytd">{{$day->name}}</td>
                           <td class="histroytd">{{$day->type}}</td>
                           <td class="histroytd">
@@ -62,6 +66,7 @@
 
                   
                 
+                    </div>
                     </div>
   
      
@@ -88,6 +93,7 @@
                 startDate: start,
                 endDate: end,
                 ranges: {
+                  'Today': [moment(), moment()],
                    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
                    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
                    'Last 30 Days': [moment().subtract(29, 'days'), moment()],

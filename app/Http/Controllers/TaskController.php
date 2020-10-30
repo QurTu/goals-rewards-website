@@ -75,7 +75,13 @@ class TaskController extends Controller
                 }
                 }
         }
-        return  redirect()->back();
+
+        $notification=array(
+            'messege'=>'Task Added!',
+            'alert-type'=>'success'
+             );
+           return Redirect()->back()->with($notification);
+        
     }
 
     /**
@@ -128,7 +134,13 @@ class TaskController extends Controller
 
         }
         $task->save();
-        return  redirect()->route('tasks.index');
+        $notification=array(
+            'messege'=>'Task Edited!',
+            'alert-type'=>'success'
+             );
+           return Redirect()->route('tasks.index')->with($notification);
+        
+       
     }
 
     /**
@@ -140,7 +152,13 @@ class TaskController extends Controller
     public function delete(Task $task)
     {
         $task->delete();
-        return \redirect()->back();
+        $notification=array(
+            'messege'=>'Task Deleted!',
+            'alert-type'=>'error'
+             );
+           return Redirect()->back()->with($notification);
+        
+       
     }
    
 }

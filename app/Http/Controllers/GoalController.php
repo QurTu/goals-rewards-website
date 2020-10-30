@@ -49,7 +49,12 @@ class GoalController extends Controller
         $goal->user_id = Auth::id();
         $goal->due_date = $request->due;
         $goal->save();
-        return  redirect()->back();
+        
+        $notification=array(
+            'messege'=>'New Goal Added!',
+            'alert-type'=>'success'
+             );
+           return Redirect()->back()->with($notification);
     }
 
     /**
@@ -90,7 +95,12 @@ class GoalController extends Controller
         $goal->why = $request->why;
         $goal->due_date = $request->due;
         $goal->save();
-        return  redirect()->route('goals.index');
+        
+        $notification=array(
+            'messege'=>'Goal Successfully Edited',
+            'alert-type'=>'success'
+             );
+           return Redirect()->route('goals.index')->with($notification);
     }
 
     /**
@@ -102,7 +112,13 @@ class GoalController extends Controller
     public function delete(Goal $goal)
     {
         $goal->delete();
-        return \redirect()->back();
-
+        
+       
+        $notification=array(
+            'messege'=>'Goal Was Deleted',
+            'alert-type'=>'error'
+             );
+           return Redirect()->back()->with($notification);
     }
-}
+    }
+

@@ -29,7 +29,13 @@ class TaskAddController extends Controller
         $task->done = 0;
         $task->due_date = $request->due_date;
         $task->save();
-        return \redirect()->back();
+        $notification=array(
+            'messege'=>'Task From The List Added',
+            'alert-type'=>'success'
+             );
+           return Redirect()->back()->with($notification);
+        
+        
     }
 
     public function add(Request $request)
@@ -43,7 +49,12 @@ class TaskAddController extends Controller
         $task->done = 0;
         $task->due_date = $request->due_date;
         $task->save();
-        return \redirect()->back();
+        $notification=array(
+            'messege'=>'New Task Added!',
+            'alert-type'=>'success'
+             );
+           return Redirect()->back()->with($notification);
+        
     }
     /**
      * Show the form for creating a new resource.
@@ -79,7 +90,13 @@ class TaskAddController extends Controller
           $history->points = $taskAdd->points;
           $history->balance = $user->points;
           $history->save();
-        return \redirect()->back();
+          $notification=array(
+            'messege'=>'Task Complieted',
+            'alert-type'=>'success'
+             );
+           return Redirect()->back()->with($notification);
+        
+       
 
     }
 
@@ -102,7 +119,8 @@ class TaskAddController extends Controller
      */
     public function show(TaskAdd $taskAdd)
     {
-     
+    
+        
     }
 
     /**
@@ -137,6 +155,12 @@ class TaskAddController extends Controller
     public function delete(TaskAdd $taskAdd)
     {
         $taskAdd->delete();
-        return \redirect()->back();
+        $notification=array(
+            'messege'=>'Task Removed!',
+            'alert-type'=>'error'
+             );
+           return Redirect()->back()->with($notification);
+        
+        
     }
 }

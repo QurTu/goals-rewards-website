@@ -34,7 +34,13 @@ class HistoryController extends Controller
           $user->save();
          $history->balance = $user->points;
          $history->save();
-         return \redirect()->back();
+         $notification=array(
+            'messege'=>'New Reward Taken!',
+            'alert-type'=>'success'
+             );
+           return Redirect()->back()->with($notification);
+        
+         
     }
 
     /**
@@ -61,7 +67,13 @@ class HistoryController extends Controller
           $user->save();
          $history->balance = $user->points;
          $history->save();
-         return \redirect()->back();
+         $notification=array(
+            'messege'=>'Reward Taken From The List!',
+            'alert-type'=>'success'
+             );
+           return Redirect()->back()->with($notification);
+        
+        
     }
 
     /**

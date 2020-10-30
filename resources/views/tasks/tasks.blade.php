@@ -126,7 +126,15 @@
     
   <div class="form-group" id ='weekdays'> 
   
-
+  @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 </div>
         
    
@@ -193,4 +201,14 @@
             });
  </script>
   
+ 
+
+@if (count($errors) > 0)
+    <script type="text/javascript">
+        $( document ).ready(function() {
+             $('#rewardmodal').modal('show');
+        });
+    </script>
+  @endif
+
 @endsection

@@ -18,6 +18,10 @@ class HistoryController extends Controller
      */
     public function TakeRewardNew(Request $request)
     {
+        $request->validate([
+            'name' => 'required',
+            'points' => 'required',
+        ]);
         $history = new History();
     
         $history->name = $request->name;

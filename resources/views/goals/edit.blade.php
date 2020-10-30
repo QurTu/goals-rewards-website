@@ -23,6 +23,15 @@
     <input type="date" value= '{{$goal->due_date}}' name="due" class="form-control"   id="exampleFormControlInput2">
   </div>
     @csrf
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
     <div class="modal-footer">
     <a href="{{route('goals.index')}}">   
           <button type="button" class="btn btn-secondary" >   Cancel</button>   </a>

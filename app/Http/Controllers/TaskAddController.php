@@ -40,6 +40,15 @@ class TaskAddController extends Controller
 
     public function add(Request $request)
     {
+
+        $request->validateWithBag('post', [
+            'name' => ['required' ],
+            'description' => ['required' ],
+            'points' => ['required'],
+        ]);
+
+     
+
         $task = new TaskAdd();
         $task->name = $request->name;
         $task->description = $request->description;

@@ -41,6 +41,12 @@ class RewardController extends Controller
      */
     public function add(Request $request)
     {
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'points' => 'required',
+        ]);
+
         $reward = new Reward();
         $reward->name = $request->name;
         $reward->description = $request->description;
@@ -90,6 +96,12 @@ class RewardController extends Controller
      */
     public function update(Request $request, Reward $reward)
     {
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'points' => 'required',
+        ]);
+        
         $reward->name = $request->name;
         $reward->description = $request->description;
         $reward->points = $request->points;

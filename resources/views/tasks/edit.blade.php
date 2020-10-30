@@ -25,7 +25,15 @@
         @endforeach
   </select>
   </div>
-
+  @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
   <div class="form-group">
   <label class="my-1 mr-2" for="inlineForm">Type:</label>
   <select  name="type" class="custom-select my-1 mr-sm-2" id="inlineForm">

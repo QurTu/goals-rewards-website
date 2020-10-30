@@ -245,7 +245,7 @@
         </div>
         <div class="modal-body">
         <form action="{{route('takeReward.list')}}" method="post">  
-        @csrf
+                @csrf
                 <div class="form-group">
           <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Choose reward from the list:</label>
           <select  name="reward" class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
@@ -274,6 +274,17 @@
     <input type='number'step='0.1'name= 'points' class="form-control" min='0' id="exampleFormControlInput2">
   </div>
     @csrf
+    @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+      
+                </ul>
+            </div>
+        @endif
+        
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           <button type="submit" class="btn btn-success">Take Reward</button>
@@ -284,5 +295,17 @@
     </div>
   </div>
                   <!--    content  SECTION  END-->
+
+@endsection
+
+@section('scripts')
+
+@if (count($errors) )
+    <script type="text/javascript">
+        $( document ).ready(function() {
+             $('#rewardmodal').modal('show');
+        });
+    </script>
+  @endif
 
 @endsection

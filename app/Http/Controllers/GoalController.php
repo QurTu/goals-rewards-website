@@ -41,7 +41,13 @@ class GoalController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function add(Request $request) 
-    {
+    {   
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'why' => 'required',
+            'due' => 'required',
+        ]);
         $goal = new Goal();
         $goal->name = $request->name;
         $goal->description = $request->description;
@@ -90,6 +96,12 @@ class GoalController extends Controller
      */
     public function update(Request $request, Goal $goal)
     {
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'why' => 'required',
+            'due' => 'required',
+        ]);
         $goal->name = $request->name;
         $goal->description = $request->description;
         $goal->why = $request->why;

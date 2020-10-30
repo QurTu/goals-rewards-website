@@ -5,9 +5,6 @@
 
 @section('content')
  
-      
-  
- 
                               <!--    content  SECTION -->
      <div  style="background-color: white;" class="container collar"> 
 
@@ -36,13 +33,6 @@
         </div> 
         @endforeach
 
-
-     
-
-
-
-
-        
     </div>
     </div> 
     
@@ -76,6 +66,15 @@
         <label for="exampleFormControlInput"> Due Date:</label>
     <input type="date" name="due" class="form-control"   id="exampleFormControlInput2">
   </div>
+  @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
     @csrf
 </div>
 <div class="modal-footer">
@@ -87,9 +86,17 @@
 </div>
 </div>
         <!--    content  SECTION  END-->
-    
-  
+     
   </tbody>
 </table>
 
+@endsection
+@section('scripts')
+@if (count($errors) > 0)
+    <script type="text/javascript">
+        $( document ).ready(function() {
+             $('#rewardmodal').modal('show');
+        });
+    </script>
+  @endif
 @endsection

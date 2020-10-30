@@ -96,6 +96,15 @@
     <input type='number'step='0.1'name= 'points' class="form-control" min='0' id="exampleFormControlInput2">
   </div>
     @csrf
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           <button type="submit" class="btn btn-success">Create New REWARD</button>
@@ -106,5 +115,18 @@
   </div>
                   <!--    content  SECTION  END-->
 
+
+@endsection
+
+
+@section('scripts')
+
+@if (count($errors) > 0)
+    <script type="text/javascript">
+        $( document ).ready(function() {
+             $('#rewardmodal').modal('show');
+        });
+    </script>
+  @endif
 
 @endsection

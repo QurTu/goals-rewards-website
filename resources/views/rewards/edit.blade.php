@@ -17,7 +17,15 @@
         <label for="exampleFormControlInput2">Point Cost For Taking Reward:</label>
     <input  value='{{$reward->points}}' type='number'step='0.1'name= 'points' class="form-control" min='0' id="exampleFormControlInput2">
   </div>
-  
+  @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
     @csrf
     <div class="modal-footer">
     <a href="{{route('rewards.index')}}">   

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Goal;
+use App\Models\Task;
+use App\Models\TaskAdd;
+use App\Models\History;
 use Illuminate\Http\Request;
 use Auth;
 use App\Models\User;
@@ -123,14 +126,19 @@ class GoalController extends Controller
      */
     public function delete(Goal $goal)
     {
-        $goal->delete();
-        
-       
+        $tasks = Task::where('goal_id', $goal->id)->delete();
+        $tasksAdd = TaskAdd::where('goal_id', $goal->id)->delete();
+        $history = History::where('goal_id', $goal->id)->get();
+        foreach($history as $task) {
+            $task->goal_id = null;
+            $task->save();
+        }
+        $goal->delete();      
         $notification=array(
-            'messege'=>'Goal Was Deleted',
+            'messege'=>'Goal And Goal Tasks was Deleted',
             'alert-type'=>'error'
              );
-           return Redirect()->back()->with($notification);
+           return Redirect()->route('goals.index')->with($notification);
     }
     }
 

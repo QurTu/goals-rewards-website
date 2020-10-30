@@ -4,6 +4,10 @@
 @section('content')
 
 <div  style="background-color: white;" class="container collar"> 
+<button type="button" class="btn btn-danger float-right" data-toggle="modal" data-target="#abd">
+                        Delete Goal
+                                       </button> 
+
 <form action="{{route('goals.update' , [$goal])}}" method="post">
 <div class="form-group">
         <label for="exampleFormControlInput1">Name:</label>
@@ -43,6 +47,23 @@
 
 
 
-
+  <!-- Delete Model  -->
+  <div class="modal" id="abd" tabindex="-1" role="dialog">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title">Are you sure, you want to delete goal and all task associated with it ?</h5>
+                              </div>
+                              <div class="modal-footer">
+                                <form action="{{route('goals.delete', [$goal])}}" method="post">
+                              
+                          @csrf
+                           <button type="submit" class="btn btn-danger">Remove </button> 
+                          </form>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
 
 @endsection

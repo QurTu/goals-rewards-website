@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 use App\Models\Goal;
+use App\Models\history;
 use App\Models\User;
 use App\Models\Task;
 use App\Models\TaskAdd;
 use App\Models\FrontEnd;
-use App\Models\History;
 use Illuminate\Http\Request;
 use Auth;
 use Carbon\Carbon;
@@ -87,6 +87,7 @@ class TaskAddController extends Controller
         $goal->save();
         }
         // save in history
+
          $history = new History();
          $history->name = $taskAdd->name;
          $history->type = "task";

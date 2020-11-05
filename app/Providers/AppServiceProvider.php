@@ -28,7 +28,7 @@ class AppServiceProvider extends ServiceProvider
             $this->app['request']->server->set('HTTPS', true);
         }
 
-        Schema::defaultStringLength(191);
+       
     }
     
 }

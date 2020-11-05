@@ -23,7 +23,7 @@ class CreateTasksTable extends Migration
             $table->unsignedBigInteger('goal_id')->nullable();
             $table->foreign('goal_id')->references('id')->on('goals');
             $table->decimal('points' , 8 ,1)->default(0);
-            $table->json('weekdays')->nullable();
+            $table->text('weekdays')->nullable();
             $table->timestamps();
         });
     }

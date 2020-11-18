@@ -61,3 +61,8 @@ Route::get('/history', [App\Http\Controllers\FrontEndController::class, 'history
 Route::get('/histroy/dates', [App\Http\Controllers\HistoryController::class, 'history'])->name('history.list');
 
 Route::get('/show', [App\Http\Controllers\TaskAddController::class, 'show'])->name('whow');
+
+
+Route::post('/show', [App\Http\Controllers\GoalController::class, 'visionsAdd'])->name('visions.add');
+Route::get('/register/visions', [App\Http\Controllers\GoalController::class, 'visions'])->name('register.visions');
+

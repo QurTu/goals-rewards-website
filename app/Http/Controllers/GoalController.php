@@ -140,5 +140,24 @@ class GoalController extends Controller
              );
            return Redirect()->route('goals.index')->with($notification);
     }
+
+
+
+    // visions methods
+    public function visions() {
+        $id = Auth::id();
+         $user =  User::where('id' , $id)->first();
+        return view('auth.visions', \compact('user'));
+    }
+
+    public function visionsAdd(Request $request){
+        $id = Auth::id();
+        $user = User::where('id', $id)->first();
+        $user->vision = $request->vision;
+        $user->worst = $request->worst;
+        $user->save();
+        return \redirect()->route('goals.index');
+
+    }
     }
 

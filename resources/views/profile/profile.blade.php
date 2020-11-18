@@ -7,12 +7,6 @@
    <div  style="background-color: white;" class="container collar"> 
                     <div class="profile">
                         <div class="profile-info">
-                            <div id="profile-container">
-                             <image id="profileImage" src="./images2/goals.png" />
-                                </div>
-                            <input id="imageUpload" type="file" 
-                         name="profile_photo" placeholder="Photo" required="" capture>
-                
                             <ul>
                                 <li>Name: {{$user->name}}</li>
                                 <li>Email: {{$user->email}}</li>
@@ -35,13 +29,14 @@
                                  </div>
                             </div>
                          </div>
+                         </div>
                         @endforeach
 
-                        </div>
-                        </div>
-                         
                     </div>
+
                     <div class="scenario">
+                        
+                        
                       <div class="vision">
                           <h1>Life Vision in 3-5 Years</h1>
                           <p>  Lorem ipsum, dolor sit amet consectetur adipisicing elit. Optio, est quasi deleniti recusandae veritatis voluptas hic libero labore aut ipsam vel. Fuga cumque, ab iure ea perspiciatis laboriosam ipsum libero voluptatum. Expedita culpa sint ducimus reprehenderit nostrum ullam sed quidem eveniet, assumenda ratione excepturi et at incidunt adipisci numquam consequatur. </p>
@@ -50,8 +45,12 @@
                         <h1>Worst Scenario in 3-5 Years</h1>
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque assumenda reprehenderit sunt mollitia magnam quae odio minima corporis, corrupti quisquam quod! Adipisci laboriosam minima voluptatibus aperiam exercitationem doloribus, corrupti laudantium repudiandae quis non quibusdam debitis voluptatum natus, voluptas sed quidem minus? Impedit sequi odit minima! Perspiciatis harum consectetur ipsum dolorum?</p>
                       </div>
+                   
                     </div>
-                    </div>
+
+                        
+                         
+                 </div>
   
                 <!--    content  SECTION  END-->
 @endsection

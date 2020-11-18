@@ -159,5 +159,11 @@ class GoalController extends Controller
         return \redirect()->route('goals.index');
 
     }
+
+    public function visionsEdit( ) {
+        $id = Auth::id();
+        $user =  User::where('id' , $id)->first();
+       return view('auth.visionsEdit', \compact('user'));
+    }
     }
 

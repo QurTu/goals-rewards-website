@@ -65,4 +65,5 @@ Route::get('/show', [App\Http\Controllers\TaskAddController::class, 'show'])->na
 
 Route::post('/show', [App\Http\Controllers\GoalController::class, 'visionsAdd'])->name('visions.add');
 Route::get('/register/visions', [App\Http\Controllers\GoalController::class, 'visions'])->name('register.visions');
+Route::get('/visions/edit', [App\Http\Controllers\GoalController::class, 'visionsEdit'])->name('visions.edit');
 

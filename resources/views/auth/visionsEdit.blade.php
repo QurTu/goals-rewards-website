@@ -8,13 +8,13 @@
 
   <div class="form-group">
     <label for="exampleFormControlTextarea1">Life Vision in 3-5 Years:</label>
-    <textarea class="form-control" value='{{$user->vision}}' name="vision" id="exampleFormControlTextarea1" rows="3"> </textarea>
+    <textarea class="form-control" name="vision" id="exampleFormControlTextarea1" rows="3"> {{$user->vision}}  </textarea>
   </div>
   <div class="form-group">
     <label for="exampleFormControlTextarea2">Worst Scenario in 3-5 Years:</label>
-    <textarea class="form-control"value='{{$user->worst}}' name="worst" id="exampleFormControlTextarea2" rows="3"> </textarea>
+    <textarea class="form-control" name="worst" id="exampleFormControlTextarea2" rows="3"> {{$user->worst}} </textarea>
   </div>
-    @csrf
+    @csrF
     @if ($errors->any())
     <div class="alert alert-danger">
         <ul>

@@ -31,7 +31,15 @@
 						<input class="input100" type="password" name="password_confirmation">
 						<span class="focus-input100" ></span>
 					</div>
-
+					@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 					<div class="container-login100-form-btn">
 						<div class="wrap-login100-form-btn">
 							<div class="login100-form-bgbtn"></div>
